@@ -7,3 +7,8 @@ $router->post('/users', 'UserController@add');
 $router->get('/users/{id}', 'UserController@show');
 $router->put('/users/{id}', 'UserController@update');
 $router->delete('/users/{id}', 'UserController@delete');
+
+$router->group(['middleware' => 'jwt.auth'], function () use ($router) {
+    $router->get('/user', 'UserController@getUserData');
+});
+
